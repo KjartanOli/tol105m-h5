@@ -81,7 +81,7 @@ const numNodes = 10;
 const numAngles = 11;
 let angle = 0;
 
-var theta = [40, -10, 125, 80, -130, 90, 60, -55, -30, -30, 0];
+const theta = [40, -10, 125, 80, -130, 90, 60, -55, -30, -30, 0];
 
 const numVertices = 24;
 
