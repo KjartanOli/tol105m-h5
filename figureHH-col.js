@@ -62,7 +62,7 @@ const leftLowerLegId = 7;
 const rightUpperLegId = 8;
 const rightLowerLegId = 9;
 
-const currBodyPart = 0;
+let currBodyPart = 0;
 
 const torsoHeight = 5.0;
 const torsoWidth = 1.0;
