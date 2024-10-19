@@ -121,7 +121,6 @@ export async function init() {
 	gl.enableVertexAttribArray(vPosition);
 
 	colorLoc = gl.getUniformLocation(program, "fColor");
-	
 	mvLoc = gl.getUniformLocation(program, "modelview");
 
 	// set projection
@@ -166,6 +165,10 @@ export async function init() {
 		case 56: // 8: from beside the car
 			view = 8;
 			document.getElementById("Viewpoint").textContent = "8: Til hliðar við bílinn";
+			break;
+		case 57: // 9: Húsþak
+			view = 9;
+			document.getElementById("Viewpoint").textContent = "9: Húsþak";
 			break;
 		case 38: // up arrow
 			height += 2.0;
@@ -348,6 +351,17 @@ function render()
 		mv = mult(mv, rotateZ(carDirection));
 		mv = mult(mv, translate(-carXPos, -carYPos, 0.0));
 		drawScenery(mv);
+		break;
+	case 9:
+		mv = lookAt(
+			vec3(-40.0, 140.0, 17.0+height),
+			vec3(carXPos, carYPos, 0.0),
+			vec3(0.0, 0.0, 1.0)
+		);
+		drawScenery(mv);
+		mv = mult(mv, translate(carXPos, carYPos, 0.0));
+		mv = mult(mv, rotateZ(-carDirection)) ;
+		drawCar(mv);
 		break;
 	}
 
