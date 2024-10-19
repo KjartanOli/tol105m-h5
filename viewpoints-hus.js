@@ -1,3 +1,11 @@
+'use strict';
+import { get_shader, init_shaders } from './shaders.js';
+
+const [vertex_shader, fragment_shader] = [
+	'shaders/viewpoints/vertex-shader.glsl',
+	'shaders/viewpoints/fragment-shader.glsl'
+].map(get_shader);
+
 let canvas;
 let gl;
 let program
@@ -73,9 +81,7 @@ const roofVertices = [
 // vertices of the track
 const tVertices = [];
 
-
-window.onload = function init()
-{
+export async function init() {
 	canvas = document.getElementById("gl-canvas");
 
 	gl = WebGLUtils.setupWebGL(canvas);
@@ -89,7 +95,7 @@ window.onload = function init()
 	//
 	//	Load shaders and initialize attribute buffers
 	//
-	program = initShaders(gl, "vertex-shader", "fragment-shader");
+	program = await init_shaders(gl, await vertex_shader, await fragment_shader);
 	gl.useProgram(program);
 
 	createTrack();
