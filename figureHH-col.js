@@ -81,7 +81,7 @@ const numNodes = 10;
 const numAngles = 11;
 let angle = 0;
 
-const theta = [40, -10, 125, 80, -130, 90, 60, -55, -30, -30, 0];
+const theta = [40, -10, 150, 80, 150, 90, 10, -55, -10, -30, 0];
 
 const numVertices = 24;
 
@@ -405,81 +405,6 @@ export async function init() {
 	gl.vertexAttribPointer(vPosition, 4, gl.FLOAT, false, 0, 0);
 	gl.enableVertexAttribArray(vPosition);
 
-	// Event listener for keyboard
-	window.addEventListener("keydown", function(e){
-		switch(e.keyCode) {
-		case 38: // upp ör
-			theta[currBodyPart] = (theta[currBodyPart] < 180.0)
-				? theta[currBodyPart] + 5
-				: 180.0;
-			document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-			initNodes(currBodyPart);
-			break;
-		case 40: // niður ör
-			theta[currBodyPart] = (theta[currBodyPart] > -180.0)
-				? theta[currBodyPart] - 5
-				: -180.0;
-			document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-			initNodes(currBodyPart);
-			break;
-		}
-	});
-
-	document.getElementById("btnTorso").onclick = function(){
-		currBodyPart = torsoId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnHead2").onclick = function(){
-		currBodyPart = head2Id;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnHead1").onclick = function(){
-		currBodyPart = head1Id;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnLeftUpperArm").onclick = function(){
-		currBodyPart = leftUpperArmId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnLeftLowerArm").onclick = function(){
-		currBodyPart = leftLowerArmId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnRightUpperArm").onclick = function(){
-		currBodyPart = rightUpperArmId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnRightLowerArm").onclick = function(){
-		currBodyPart = rightLowerArmId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnLeftUpperLeg").onclick = function(){
-		currBodyPart = leftUpperLegId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnLeftLowerLeg").onclick = function(){
-		currBodyPart = leftLowerLegId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnRightUpperLeg").onclick = function(){
-		currBodyPart = rightUpperLegId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
-	document.getElementById("btnRightLowerLeg").onclick = function(){
-		currBodyPart = rightLowerLegId;
-		document.getElementById("currAngle").innerHTML = theta[currBodyPart];
-	};
-
 	for(let i = 0; i < numNodes; i++) initNodes(i);
 
 	//event listeners for mouse
@@ -527,6 +452,29 @@ let render = function() {
 	);
 	mv = mult(mv, rotateX(spinX));
 	mv = mult(mv, rotateY(spinY));
+
+	const left_leg = theta[leftUpperLegId];
+	const left_arm = theta[leftUpperArmId];
+	const right_leg = theta[rightUpperLegId];
+	const right_arm = theta[rightUpperArmId];
+
+	const time = Date.now();
+	const angle = Math.sin(time / 1000) * 50;
+	theta[leftUpperLegId] = left_leg + angle;
+	theta[leftUpperArmId] = left_arm - angle;
+
+	theta[rightUpperLegId] = right_leg - angle;
+	theta[rightUpperArmId] = right_arm + angle;
+
+	initNodes(leftUpperLegId);
+	initNodes(leftUpperArmId);
+	initNodes(rightUpperLegId);
+	initNodes(rightUpperArmId);
+
+	theta[leftUpperLegId] = left_leg;
+	theta[leftUpperArmId] = left_arm;
+	theta[rightUpperLegId] = right_leg;
+	theta[rightUpperArmId] = right_arm;
 
 	modelViewMatrix = mv;
 	traverse(torsoId);
