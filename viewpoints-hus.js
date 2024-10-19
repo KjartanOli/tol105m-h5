@@ -129,52 +129,51 @@ export async function init() {
 	proj = perspective(50.0, 1.0, 1.0, 500.0);
 	gl.uniformMatrix4fv(pLoc, false, flatten(proj));
 
-	document.getElementById("Viewpoint").innerHTML = "1: Fjarlægt sjónarhorn";
-	document.getElementById("Height").innerHTML = "Viðbótarhæð: "+ height;
+	document.getElementById("Viewpoint").textContent = "1: Fjarlægt sjónarhorn";
+	document.getElementById("Height").textContent = "Viðbótarhæð: "+ height;
 
 	// Event listener for keyboard
 	window.addEventListener("keydown", function(e){
 		switch(e.keyCode) {
-		case 49:	// 1: distant and stationary viewpoint
+		case 49: // 1: distant and stationary viewpoint
 			view = 1;
-			document.getElementById("Viewpoint").innerHTML = "1: Fjarlægt sjónarhorn";
+			document.getElementById("Viewpoint").textContent = "1: Fjarlægt sjónarhorn";
 			break;
-		case 50:	// 2: panning camera inside the track
+		case 50: // 2: panning camera inside the track
 			view = 2;
-			document.getElementById("Viewpoint").innerHTML = "2: Horfa á bílinn innan úr hringnum";
+			document.getElementById("Viewpoint").textContent = "2: Horfa á bílinn innan úr hringnum";
 			break;
-		case 51:	// 3: panning camera inside the track
+		case 51: // 3: panning camera inside the track
 			view = 3;
-			document.getElementById("Viewpoint").innerHTML = "3: Horfa á bílinn fyrir utan hringinn";
+			document.getElementById("Viewpoint").textContent = "3: Horfa á bílinn fyrir utan hringinn";
 			break;
-		case 52:	// 4: driver's point of view
+		case 52: // 4: driver's point of view
 			view = 4;
-			document.getElementById("Viewpoint").innerHTML = "4: Sjónarhorn ökumanns";
+			document.getElementById("Viewpoint").textContent = "4: Sjónarhorn ökumanns";
 			break;
-		case 53:	// 5: drive around while looking at a house
+		case 53: // 5: drive around while looking at a house
 			view = 5;
-			document.getElementById("Viewpoint").innerHTML = "5: Horfa alltaf á eitt hús innan úr bílnum";
+			document.getElementById("Viewpoint").textContent = "5: Horfa alltaf á eitt hús innan úr bílnum";
 			break;
-		case 54:	// 6: Above and behind the car
+		case 54: // 6: Above and behind the car
 			view = 6;
-			document.getElementById("Viewpoint").innerHTML = "6: Fyrir aftan og ofan bílinn";
+			document.getElementById("Viewpoint").textContent = "6: Fyrir aftan og ofan bílinn";
 			break;
-		case 55:	// 7: from another car in front
+		case 55: // 7: from another car in front
 			view = 7;
-			document.getElementById("Viewpoint").innerHTML = "7: Horft aftur úr bíl fyrir framan";
+			document.getElementById("Viewpoint").textContent = "7: Horft aftur úr bíl fyrir framan";
 			break;
-		case 56:	// 8: from beside the car
+		case 56: // 8: from beside the car
 			view = 8;
-			document.getElementById("Viewpoint").innerHTML = "8: Til hliðar við bílinn";
+			document.getElementById("Viewpoint").textContent = "8: Til hliðar við bílinn";
 			break;
-			
-		case 38:		// up arrow
+		case 38: // up arrow
 			height += 2.0;
-			document.getElementById("Height").innerHTML = "Viðbótarhæð: "+ height;
+			document.getElementById("Height").textContent = "Viðbótarhæð: "+ height;
 			break;
-		case 40:		// down arrow
+		case 40: // down arrow
 			height -= 2.0;
-			document.getElementById("Height").innerHTML = "Viðbótarhæð: "+ height;
+			document.getElementById("Height").textContent = "Viðbótarhæð: "+ height;
 			break;
 		}
 	});
