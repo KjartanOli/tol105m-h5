@@ -1,43 +1,23 @@
+<!DOCTYPE html>
 <html>
+	<head>
+		<title>Viewpoints</title>
+		<meta charset="UTF-8"/>
+		<script type="text/javascript" src="webgl-utils.js"></script>
+		<script type="module" src="shaders.js"></script>
+		<script type="text/javascript" src="MV.js"></script>
+		<script type="module" src="viewpoints-hus.js"></script>
+		<script type="module">
+			import { init } from './viewpoints-hus.js';
+			window.onload = init;
+		</script>
 
-<script id="vertex-shader" type="x-shader/x-vertex">
-
-attribute  vec4 vPosition;
-
-uniform mat4 projection;
-uniform mat4 modelview;
-
-void main() 
-{
-    gl_Position = projection * modelview * vPosition;
-} 
-</script>
-
-<script id="fragment-shader" type="x-shader/x-fragment">
-
-precision mediump float;
-   
-uniform vec4 fColor;
-
-void main()
-{
-    gl_FragColor = fColor;
-}
-</script>
-
-<script type="text/javascript" src="../Common/webgl-utils.js"></script>
-<script type="text/javascript" src="../Common/initShaders.js"></script>
-<script type="text/javascript" src="../Common/MV.js"></script>
-<script type="text/javascript" src="viewpoints-hus.js"></script>
-
-<body>
-<h4>Sláið á 1, 2, ..., 8 til að skipta um sjónarhorn.  Núverandi sjónarhorn er fyrir neðan myndina</h4>
-<h4>Örvalyklar hækka og lækka staðsetningu áhorfanda (fer eftir sjónarhorni)</h4>
-<canvas id="gl-canvas" width="700" height="700">
-<div id="Viewpoint"></div>
-<div id="Height"></div>
-   
-<br/>
-
-</body>
+	</head>
+	<body>
+		<h4>Sláið á 1, 2, ..., 8 til að skipta um sjónarhorn.  Núverandi sjónarhorn er fyrir neðan myndina</h4>
+		<h4>Örvalyklar hækka og lækka staðsetningu áhorfanda (fer eftir sjónarhorni)</h4>
+		<canvas id="gl-canvas" width="700" height="700"></canvas>
+			<div id="Viewpoint"></div>
+			<div id="Height"></div>
+	</body>
 </html>
