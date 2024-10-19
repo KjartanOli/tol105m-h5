@@ -10,6 +10,12 @@ let canvas;
 let gl;
 let program
 
+let movement = false;
+let spinX = 0;
+let spinY = 0;
+let origX;
+let origY;
+
 // position of the track
 const TRACK_RADIUS = 100.0;
 const TRACK_INNER = 90.0;
@@ -127,6 +133,30 @@ export async function init() {
 	pLoc = gl.getUniformLocation(program, "projection");
 	proj = perspective(50.0, 1.0, 1.0, 500.0);
 	gl.uniformMatrix4fv(pLoc, false, flatten(proj));
+
+	//event listeners for mouse
+	canvas.addEventListener("mousedown", function(e){
+		if (view !== 1)
+			return;
+		movement = true;
+		origX = e.clientX;
+		origY = e.clientY;
+		e.preventDefault(); // Disable drag and drop
+	});
+
+	canvas.addEventListener("mouseup", function(e){
+		movement = false;
+	});
+
+	canvas.addEventListener("mousemove", function(e){
+		if(movement) {
+			spinY = (spinY + (e.clientX - origX)) % 360;
+			spinX = (spinX + (origY - e.clientY)) % 360;
+			origX = e.clientX;
+			origY = e.clientY;
+		}
+	});
+
 
 	document.getElementById("Viewpoint").textContent = "1: Fjarlægt sjónarhorn";
 	document.getElementById("Height").textContent = "Viðbótarhæð: "+ height;
@@ -290,7 +320,10 @@ function render()
 	case 1:
 		// Distant and stationary viewpoint
 		mv = lookAt(vec3(250.0, 0.0, 100.0+height), vec3(0.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0));
+		mv = mult(mv, rotateX(spinX));
+		mv = mult(mv, rotateY(spinY));
 		drawScenery(mv);
+
 		mv = mult(mv, translate(carXPos, carYPos, 0.0));
 		mv = mult(mv, rotateZ(-carDirection)) ;
 		drawCar(mv);
