@@ -1,36 +1,41 @@
-<html>
-<script type="text/javascript" src="webgl-utils.js"></script>
-<script type="module" src="shaders.js"></script>
-<script type="text/javascript" src="MV.js"></script>
-<script type="module" src="figureHH-col.js"></script>
-<script type="module">
-	import { init } from './figureHH-col.js';
-	window.onload = init;
-</script>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Figure HH</title>
+		<script type="text/javascript" src="webgl-utils.js"></script>
+		<script type="module" src="shaders.js"></script>
+		<script type="text/javascript" src="MV.js"></script>
+		<script type="module" src="figureHH-col.js"></script>
+		<script type="module">
+			import { init } from './figureHH-col.js';
+			window.onload = init;
+		</script>
 
-<body>
-Velja virkan líkamshluta með hnöppum, hreyfa hann með upp/niður örvum.
-<table style="width:100%">
-  <tr>
-    <td>
-	<canvas id="gl-canvas" width="600" height="600">
-    </td>
+	</head>
+	<body>
+		Velja virkan líkamshluta með hnöppum, hreyfa hann með upp/niður örvum.
+		<table style="width:100%">
+			<tr>
+				<td>
+					<canvas id="gl-canvas" width="600" height="600">
+				</td>
 
-    <td>
-        <button id = "btnTorso">Torso angle</button><p></p>
-        <button id = "btnHead2">Head2 angle</button><p></p>
-        <button id = "btnHead1">Head1 angle</button><p></p>
-        <button id = "btnLeftUpperArm">Left upper arm angle</button><p></p>
-        <button id = "btnLeftLowerArm">Left lower arm angle</button><p></p>
-        <button id = "btnRightUpperArm">Right upper arm angle</button><p></p>
-        <button id = "btnRightLowerArm">Right lower arm angle</button><p></p>
-        <button id = "btnLeftUpperLeg">Left upper leg angle</button><p></p>
-        <button id = "btnLeftLowerLeg">Left lower leg angle</button><p></p>
-        <button id = "btnRightUpperLeg">Right upper leg angle</button><p></p>
-        <button id = "btnRightLowerLeg">Right lower leg angle</button><p></p>
-        Current angle: <div id="currAngle"></div>
-    </td>
-  </tr>
-</table>
-</body>
+				<td>
+					<button id = "btnTorso">Torso angle</button><p></p>
+					<button id = "btnHead2">Head2 angle</button><p></p>
+					<button id = "btnHead1">Head1 angle</button><p></p>
+					<button id = "btnLeftUpperArm">Left upper arm angle</button><p></p>
+					<button id = "btnLeftLowerArm">Left lower arm angle</button><p></p>
+					<button id = "btnRightUpperArm">Right upper arm angle</button><p></p>
+					<button id = "btnRightLowerArm">Right lower arm angle</button><p></p>
+					<button id = "btnLeftUpperLeg">Left upper leg angle</button><p></p>
+					<button id = "btnLeftLowerLeg">Left lower leg angle</button><p></p>
+					<button id = "btnRightUpperLeg">Right upper leg angle</button><p></p>
+					<button id = "btnRightLowerLeg">Right lower leg angle</button><p></p>
+					Current angle: <div id="currAngle"></div>
+				</td>
+			</tr>
+		</table>
+	</body>
 </html>
